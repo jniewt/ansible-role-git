@@ -1,29 +1,39 @@
 git
 ===
 
-A brief description of the role goes here.
+Installs git and essential extensions on a Debian system.
+Generates configuration along with some useful aliases.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
-* Tested on Ansible 2.5 or higher.
+Tested on Ansible 2.5 or higher.
 
 Role Variables
 --------------
+Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Name for the config file
+
+    git_user_name: "User Name"
+
+Email address for the config file
+
+    git_user_email: "your@email.com"
+
+
+There are more variables in `vars/main.yml`.
+Change these only if you know what you're doing.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This example shows how the role can be used while prompting the user for data.
 
     - name: Some git installation playbook
       hosts: all
@@ -38,6 +48,10 @@ Including an example of how to use your role (for instance, with variables passe
         - import_role:
             name: git
 
+License
+-------
+
+MIT / BSD
 
 Author Information
 ------------------
