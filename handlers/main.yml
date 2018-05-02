@@ -1,2 +1,5 @@
 ---
 # handlers file for git
+
+- name: lfs init
+  command: "git lfs install"
