@@ -5,12 +5,14 @@
   when: ansible_os_family != 'Debian'
 
 - name: Install packages
+  become: yes
   apt:
     name: "{{ git_packages }}"
     state: present
     update_cache: yes
 
 - name: Install Git LFS (buster/sid)
+  become: yes
   apt:
     name: git-lfs
     state: present
@@ -23,20 +25,12 @@
   when: install_git_lfs and ansible_distribution_major_version != "buster/sid"
 
 - name: Configure global user settings
-  become: no
-  ini_file:
-    section: user
-    path: ~/.gitconfig
-    state: present
-    no_extra_spaces: no
-    value: "{{ item.value }}"
-    option: "{{ item.key }}"
-    create: yes  # whether to create the config file if it's missing
-  vars:
-    git_user:
-      email: "{{ git_user_email }}"
-      name: "{{ git_user_name }}"
-  with_dict: "{{ git_user }}"
+  template:
+    src: gitconfig.j2
+    dest: ~/.gitconfig
+    group: "{{ ansible_user_id }}"
+    owner: "{{ ansible_user_id }}"
+    mode: "u=rw,g=r,o=r"
 
 # TODO other config
 
