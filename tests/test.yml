@@ -1,0 +1,8 @@
+---
+- name: Test role git
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  tasks:
+    - import_role:
+        name: git

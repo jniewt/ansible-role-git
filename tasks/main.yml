@@ -1,0 +1,19 @@
+---
+- name: Check if system is debian
+  fail:
+    msg: 'This role supports debian only'
+  when: ansible_os_family != 'Debian'
+
+- name: Install packages
+  apt:
+    name: "{{ git_packages }}"
+    state: present
+    update_cache: yes
+
+# TODO configure user
+
+# TODO other config
+
+# TODO aliases
+
+# TODO if git-lfs installed then init
