@@ -10,6 +10,17 @@
     state: present
     update_cache: yes
 
+- name: Install Git LFS (buster/sid)
+  apt:
+    name: git-lfs
+    state: present
+  when: install_git_lfs and ansible_distribution_major_version == "buster/sid"
+
+#TODO
+- name: Install Git LFS (not buster/sid)
+  debug:
+    msg: "Currently only supported for buster/sid"
+  when: install_git_lfs and ansible_distribution_major_version != "buster/sid"
 # TODO configure user
 
 # TODO other config
