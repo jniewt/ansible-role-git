@@ -1,0 +1,64 @@
+[user]
+  email = {{ git_user_email }}
+  name = {{ git_user_name }}
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore_global
+[alias]
+# Shortcuts for svn users
+  ci = commit
+  co = checkout
+  st = status -sb
+
+# Show all changes (staged and otherwise) since last commit
+  di = diff HEAD --
+
+# Nice and compact log output with branch info
+  lo = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+# Show what would be pushed with git push
+  unpushed = log @{u}..@
+
+# Show all local (unpushed) commits from all branches
+  local = log --branches --not --remotes --decorate
+
+# Because reset is so confusing
+  unstage = reset
+
+# Fetch upstream and merge tracking branch only if fast-forward is possible
+  up = !git fetch --all -p; git merge --ff-only @{u}
+
+# If fast-forward above is not possible, see what's new on upstream. Then follow it up manually with: git rebase -p
+  whatsnew = !git log --graph --oneline --decorate --date-order --color --boundary ..@{u}
+
+# Undo last commit but leave the changes from it in the stage area
+  uncommit = reset --soft HEAD^
+
+
+# Restore file(s) to last commit, i.e. undo local changes; also useful as: git restore <file>
+  restore = checkout --
+
+# Stash all including untracked
+  stash-all = stash save --include-untracked
+
+
+# Interactively choose which hunks to stage
+  ap = add --patch
+
+# Show list of defined aliases
+  aliases = !git config --list | grep 'alias' | sort
+
+[push]
+  default = simple
+  followTags = true
+[status]
+  showUntrackedFiles = all
+[merge]
+  conflictstyle = diff3
+  tool = meld
+[init]
+  templatedir = ~/.git-templates
+[branch]
+  autosetuprebase = always
+[pull]
+	rebase = preserve
