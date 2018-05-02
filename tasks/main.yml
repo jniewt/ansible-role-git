@@ -21,7 +21,22 @@
   debug:
     msg: "Currently only supported for buster/sid"
   when: install_git_lfs and ansible_distribution_major_version != "buster/sid"
-# TODO configure user
+
+- name: Configure global user settings
+  become: no
+  ini_file:
+    section: user
+    path: ~/.gitconfig
+    state: present
+    no_extra_spaces: no
+    value: "{{ item.value }}"
+    option: "{{ item.key }}"
+    create: yes  # whether to create the config file if it's missing
+  vars:
+    git_user:
+      email: "{{ git_user_email }}"
+      name: "{{ git_user_name }}"
+  with_dict: "{{ git_user }}"
 
 # TODO other config
 

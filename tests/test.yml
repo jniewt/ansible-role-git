@@ -3,6 +3,13 @@
   hosts: localhost
   become: yes
   become_method: sudo
+  vars_prompt:
+    - name: "git_user_name"
+      prompt: "Full name"
+      private: no
+    - name: "git_user_email"
+      prompt: "Email address"
+      private: no
   tasks:
     - import_role:
         name: git
