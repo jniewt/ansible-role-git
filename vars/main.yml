@@ -4,4 +4,4 @@ git_packages:
   - git
   - git-flow
 
-install_git_lfs: yes
+git_lfs_install: yes
