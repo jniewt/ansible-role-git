@@ -1,0 +1,20 @@
+---
+
+# copy and set executable git-prompt.sh
+- name: Copy git-prompt.sh
+  copy:
+    dest: ~/.git-prompt.sh
+    src: git-prompt.sh
+    group: "{{ ansible_user_id }}"
+    owner: "{{ ansible_user_id }}"
+    mode: "u=rwx,g=r,o=r"
+
+# replace bashrc
+- name: Replace bashrc
+  copy:
+    dest: ~/.bashrc
+    src: bashrc
+    group: "{{ ansible_user_id }}"
+    owner: "{{ ansible_user_id }}"
+    mode: "u=rw,g=r,o=r"
+    backup: yes

@@ -21,6 +21,12 @@ Email address for the config file
 
     git_user_email: "your@email.com"
 
+Whether to install git prompt in your bash prompt, showing current branch and some other useful information.
+See [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt) for details.
+
+Note, that **this will overwrite your .bashrc** (will backup the old one though)!
+
+    git_prompt_install: no
 
 There are more variables in `vars/main.yml`.
 Change these only if you know what you're doing.

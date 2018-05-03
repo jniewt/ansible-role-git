@@ -33,3 +33,7 @@
     owner: "{{ ansible_user_id }}"
     mode: "u=rw,g=r,o=r"
   notify: lfs init  # also init lfs if the config file gets overwritten
+
+- import_tasks: prompt.yml
+  tags: git-prompt
+  when: git_prompt_install

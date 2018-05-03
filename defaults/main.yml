@@ -3,3 +3,6 @@
 
 git_user_name: "User Name"
 git_user_email: "your@email.com"
+
+# Only apply to a fresh install, it will overwrite your bashrc!
+git_prompt_install: no
