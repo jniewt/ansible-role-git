@@ -4,6 +4,9 @@ git
 Installs git and essential extensions on a Debian system.
 Generates configuration along with some useful aliases.
 
+Run as the user you want to use git with.
+When running the playbook, it might be necessary to use `--ask-become-pass`.
+
 Requirements
 ------------
 
