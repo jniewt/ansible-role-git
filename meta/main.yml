@@ -8,7 +8,7 @@ galaxy_info:
   platforms:
   - name: Debian
     versions:
-    - buster/sid
+    - buster
   galaxy_tags:
     - development
     - system
