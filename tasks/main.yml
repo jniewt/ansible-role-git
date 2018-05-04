@@ -16,14 +16,14 @@
   apt:
     name: git-lfs
     state: present
-  when: git_lfs_install and ansible_distribution_major_version == "buster/sid"
+  when: git_lfs_install | bool and ansible_distribution_major_version == "buster/sid"
   notify: lfs init
 
 #TODO
 - name: Install Git LFS (not buster/sid)
   debug:
     msg: "Currently only supported for buster/sid"
-  when: git_lfs_install and ansible_distribution_major_version != "buster/sid"
+  when: git_lfs_install | bool and ansible_distribution_major_version != "buster/sid"
 
 - name: Configure global user settings
   template:
@@ -36,4 +36,4 @@
 
 - import_tasks: prompt.yml
   tags: git-prompt
-  when: git_prompt_install
+  when: git_prompt_install | bool
