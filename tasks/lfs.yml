@@ -1,0 +1,21 @@
+---
+
+- name: Retrieve packagecloud repository script (other distros)
+  become: yes
+  get_url:
+    dest: /tmp/script.deb.sh
+    url: https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh
+    mode: "u=rwx,g=rx,o=rx"
+  when: ansible_distribution_major_version != "buster/sid"
+
+- name: Add packagecloud repository (other distros)
+  become: yes
+  shell: "/tmp/script.deb.sh"
+  when: ansible_distribution_major_version != "buster/sid"
+
+- name: Install Git LFS
+  become: yes
+  apt:
+    name: git-lfs
+    state: present
+  notify: lfs init

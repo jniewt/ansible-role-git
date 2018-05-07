@@ -11,20 +11,6 @@
     state: present
     update_cache: yes
 
-- name: Install Git LFS (buster/sid)
-  become: yes
-  apt:
-    name: git-lfs
-    state: present
-  when: git_lfs_install | bool and ansible_distribution_major_version == "buster/sid"
-  notify: lfs init
-
-#TODO
-- name: Install Git LFS (not buster/sid)
-  debug:
-    msg: "Currently only supported for buster/sid"
-  when: git_lfs_install | bool and ansible_distribution_major_version != "buster/sid"
-
 - name: Configure global user settings
   template:
     src: gitconfig.j2
@@ -32,7 +18,10 @@
     group: "{{ ansible_user_id }}"
     owner: "{{ ansible_user_id }}"
     mode: "u=rw,g=r,o=r"
-  notify: lfs init  # also init lfs if the config file gets overwritten
+
+- import_tasks: lfs.yml
+  tags: git-lfs
+  when: git_lfs_install | bool
 
 - import_tasks: prompt.yml
   tags: git-prompt
