@@ -14,6 +14,12 @@
         image: "geerlingguy/docker-debian9-ansible"
       - name: debian-testing
         image: "jniewt/docker-debian-testing-ansible"
+      - name: ubuntu14
+        image: "geerlingguy/docker-ubuntu1404-ansible"
+      - name: ubuntu16
+        image: "geerlingguy/docker-ubuntu1604-ansible"
+      - name: ubuntu18
+        image: "geerlingguy/docker-ubuntu1804-ansible"
   tasks:
   - include_role:
       name: chrismeyersfsu.provision_docker
@@ -45,4 +51,3 @@
       command: "git lfs version"
       register: git_version_lfs
       failed_when: git_version_lfs.rc != 0
-      when: ansible_distribution_major_version == "buster/sid"

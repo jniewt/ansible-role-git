@@ -1,8 +1,8 @@
 ---
 - name: Check if system is debian
   fail:
-    msg: 'This role supports debian only'
-  when: ansible_os_family != 'Debian'
+    msg: 'This role supports debian and ubuntu only'
+  when: ansible_os_family != 'Debian' and ansible_os_family != 'Ubuntu'
 
 - name: Install packages
   become: yes
