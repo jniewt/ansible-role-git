@@ -3,3 +3,4 @@
 
 - name: lfs init
   command: "git lfs install"
+  ignore_errors: yes

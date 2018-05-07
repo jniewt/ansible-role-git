@@ -1,11 +1,18 @@
 git
 ===
 
-Installs git and essential extensions on a Debian system.
+Installs git and essential extensions on a Debian or Ubuntu system.
 Generates configuration along with some useful aliases.
 
 Run as the user you want to use git with.
 When running the playbook, it might be necessary to use `--ask-become-pass`.
+
+Tested on the following distributions:
+ * Debian buster/sid
+ * Debian 9
+ * Ubuntu 18.04
+ * Ubuntu 16.04
+ * Ubuntu 14.04
 
 Requirements
 ------------
@@ -65,4 +72,4 @@ MIT / BSD
 Author Information
 ------------------
 
-jniewt |[jniewt@gmail.com](jniewt@gmail.com)
+jniewt | [jniewt@gmail.com](jniewt@gmail.com)

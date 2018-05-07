@@ -1,8 +1,53 @@
 ---
-- name: Test role git
+- name: Install requirements
   hosts: localhost
+  tasks:
+    - name: Install requirements.yml
+      local_action: command ansible-galaxy install -r requirements.yml --ignore-errors
+
+- name: Bring up docker container
+  hosts: localhost
+  gather_facts: false
+  vars:
+    inventory:
+      - name: debian9
+        image: "geerlingguy/docker-debian9-ansible"
+      - name: debian-testing
+        image: "jniewt/docker-debian-testing-ansible"
+      - name: ubuntu14
+        image: "geerlingguy/docker-ubuntu1404-ansible"
+      - name: ubuntu16
+        image: "geerlingguy/docker-ubuntu1604-ansible"
+      - name: ubuntu18
+        image: "geerlingguy/docker-ubuntu1804-ansible"
+  tasks:
+  - include_role:
+      name: chrismeyersfsu.provision_docker
+    vars:
+      provision_docker_inventory: "{{ inventory }}"
+
+- name: Run Tests
+  hosts: docker_containers
+  remote_user: root
+  vars:
+    ansible_unit_test: True
   tasks:
     - import_role:
         name: git
       vars:
         git_prompt_install: 'yes'
+
+    - name: Test git installation
+      command: "git --version"
+      register: git_version
+      failed_when: git_version.rc != 0
+
+    - name: Test git flow installation
+      command: "git flow version"
+      register: git_version_flow
+      failed_when: git_version_flow.rc != 0
+
+    - name: Test git lfs installation
+      command: "git lfs version"
+      register: git_version_lfs
+      failed_when: git_version_lfs.rc != 0
