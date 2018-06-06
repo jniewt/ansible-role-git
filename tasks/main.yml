@@ -1,7 +1,7 @@
 ---
-- name: Check if system is debian
+- name: Stop if os release is incompatible
   fail:
-    msg: 'This role supports debian and ubuntu only'
+    msg: "{{ ansible_os_family }} is incompatible with this role. See README for details."
   when: ansible_os_family != 'Debian' and ansible_os_family != 'Ubuntu'
 
 - name: Install packages
