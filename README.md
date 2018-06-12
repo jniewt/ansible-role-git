@@ -23,14 +23,17 @@ Role Variables
 --------------
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-Name for the config file
+##### `git_user_name`
+Username to be placed in the config file.
 
     git_user_name: "User Name"
 
-Email address for the config file
+##### `git_user_email`
+Email address to be placed in the config file.
 
     git_user_email: "your@email.com"
 
+##### `git_prompt_install`
 Whether to install git prompt in your bash prompt, showing current branch and some other useful information.
 See [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt) for details.
 
@@ -51,7 +54,7 @@ Example Playbook
 
 This example shows how the role can be used while prompting the user for data.
 
-    - name: Some git installation playbook
+    - name: Git installation playbook
       hosts: all
       vars_prompt:
         - name: "git_user_name"
@@ -60,9 +63,11 @@ This example shows how the role can be used while prompting the user for data.
         - name: "git_user_email"
           prompt: "Email address"
           private: no
+      vars:
+        git_prompt_install: yes
       tasks:
         - import_role:
-            name: git
+            name: jniewt.git
 
 License
 -------

@@ -34,16 +34,17 @@
 # Undo last commit but leave the changes from it in the stage area
   uncommit = reset --soft HEAD^
 
-
 # Restore file(s) to last commit, i.e. undo local changes; also useful as: git restore <file>
   restore = checkout --
 
 # Stash all including untracked
   stash-all = stash save --include-untracked
 
-
 # Interactively choose which hunks to stage
   ap = add --patch
+
+# Update all submodules from their corresponding remotes
+  subup = submodule update --remote
 
 # Show list of defined aliases
   aliases = !git config --list | grep 'alias' | sort
@@ -53,6 +54,7 @@
   followTags = true
 [status]
   showUntrackedFiles = all
+  submodulesummary = 1
 [merge]
   conflictstyle = diff3
   tool = meld
@@ -61,4 +63,6 @@
 [branch]
   autosetuprebase = always
 [pull]
-	rebase = preserve
+  rebase = preserve
+[diff]
+  submodule = log
